@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'iconfont';
+            src: url('fonts/iconfont.eot');
+            src: url('fonts/iconfont.eot?#iefix') format('embedded-opentype'), url('fonts/iconfont.woff2') format('woff2'), url('fonts/iconfont.woff') format('woff'), url('fonts/iconfont.ttf') format('truetype'), url('fonts/iconfont.svg#iconfont') format('svg');
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .box {
+            width: 200px;
+            height: 50px;
+            background: pink;
+        }
+        
+        .box::before {
+            display: inline-block;
+            content: '我';
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background-color: plum;
+        }
+        
+        .box::after {
+            font-family: "iconfont" !important;
+            content: '\e617;';
+            margin: 0;
+        }
+        
+        .box2 {
+            position: relative;
+            overflow: hidden;
+            width: 200px;
+            height: 30px;
+            border: 1px solid red;
+            margin: 100px auto;
+            border-radius: 15px;
+        }
+        
+        .box3 {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            background-color: red;
+            transition: all 2s;
+        }
+        
+        .box2:hover .box3 {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        嘿嘿
+    </div>
+
+    <div class="box2">
+        <div class="box3"></div>
+
+    </div>
+    <div class="box10"></div>
+
+</body>
+
+</html>

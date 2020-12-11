@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 3000px;
+        }
+
+        .one {
+            z-index: 1;
+            position: relative;
+            float: left;
+            left: 50px;
+            width: 200px;
+            height: 200px;
+            background-color: gray;
+        }
+
+        div span {
+            position: absolute;
+            bottom: -10px;
+        }
+
+        .two {
+            position: relative;
+            z-index: 10;
+            width: 300px;
+            height: 300px;
+            background-color: green;
+        }
+
+        .three {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            right: 0;
+            background-color: indianred;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="one">
+        <span>nihao</span>
+    </div>
+    <div class="two"></div>
+    <div class="three">fix positon</div>
+</body>
+
+</html>

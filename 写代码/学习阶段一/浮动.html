@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .base {
+            width: 200px;
+            height: 100px;
+            background-color: green;
+        }
+
+        .box {
+            width: 500px;
+            border: 10px solid;
+            overflow: hidden;
+
+            background-color: transparent;
+        }
+
+        .green {
+            float: left;
+
+            background-color: green;
+        }
+
+        .pink {
+            float: left;
+            background-color: pink;
+
+        }
+
+        .gray {
+
+            float: left;
+            background-color: gray;
+        }
+
+        .ni {
+            clear: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box clearfix">
+        <div class="green base"></div>
+        <div class="pink base"></div>
+
+        <div class="gray base"></div>
+        <div class="gray base"></div>
+        <div class="gray base"></div>
+        <div class="ni">nihao</div>
+
+
+    </div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            width: 1535px;
+            height: 768px;
+            background-color: pink;
+        }
+
+        .left {
+            float: left;
+            width: 292px;
+            height: 768px;
+            background-color: green;
+            margin-right: 18px;
+        }
+
+        .right {
+            float: left;
+            width: 1225px;
+            height: 768px;
+            background-color: grey;
+        }
+
+        .right ul li {
+            list-style: none;
+            margin-right: 18px;
+            margin-bottom: 18px;
+            float: left;
+            width: 292px;
+            height: 375px;
+            background-color: indigo;
+        }
+
+        .right ul .last {
+            margin-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="left"></div>
+        <div class="right">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li class="last">4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li class="last">8</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>
