@@ -1,0 +1,43 @@
+.w {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.header {
+    height: 82px;
+    line-height: 82px;
+    border-bottom: 2px solid #c61a2a;
+}
+
+.register_area {
+    margin-top: 22px;
+}
+
+.register_area .hd {
+    height: 42px;
+    background-color: pink;
+}
+
+.register_area .hd h1 {
+    font-size: 18px;
+    line-height: 42px;
+    font-weight: 400;
+}
+
+.register_area .hd p {
+    font-size: 14px;
+    line-height: 42px;
+}
+
+.register_area .bd {
+    height: 422px;
+    background-color: powderblue;
+}

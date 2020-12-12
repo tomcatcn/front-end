@@ -1,0 +1,117 @@
+.header {
+    position: relative;
+}
+
+.sk a {
+    position: absolute;
+    left: 200px;
+    top: 17px;
+    display: block;
+    width: 60px;
+    height: 28px;
+    background: url(../images/sk.png) no-repeat;
+}
+
+.sk_list li {
+    float: left;
+    height: 45px;
+    line-height: 45px;
+    margin: 0 20px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.sk_con li {
+    float: left;
+    height: 45px;
+    margin: 0 24px;
+    line-height: 48px;
+    font-size: 14px;
+}
+
+.sk_con li:last-child::after {
+    content: '\e91e';
+    font-family: 'icomoon';
+}
+
+.sk_container {
+    margin-bottom: 286px;
+}
+
+.sk_container .sk_bd {
+    padding-top: 24px;
+}
+
+.sk_container .sk_bd li {
+    position: relative;
+    float: left;
+    width: 291px;
+    height: 459px;
+    margin-right: 11px;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #b1191a;
+}
+
+.sk_container .sk_bd li:nth-child(4n) {
+    margin-right: 0;
+}
+
+.sk_container .sk_bd li:hover {
+    border: 1px solid #b1191a;
+}
+
+.sk_container .sk_bd li .pic {
+    height: 275px;
+    width: 291px;
+    text-align: center;
+}
+
+.sk_container .sk_bd .info {
+    margin-top: 28px;
+    font-size: 14px;
+    padding: 0 10px;
+}
+
+.sk_container .sk_bd .info .price {
+    font-size: 22px;
+    color: #e60012;
+}
+
+.sk_container .sk_bd .info .price em {
+    font-size: 14px;
+    color: #ababab;
+    text-decoration: line-through;
+}
+
+.sk_container .sk_bd .info .rest_goods em {
+    font-size: 16px;
+    color: #e55256;
+}
+
+.sk_container .sk_bd .info .rest_goods span {
+    display: inline-block;
+    width: 132px;
+    height: 12px;
+    overflow: hidden;
+    border: 1px solid #ed282e;
+    border-radius: 6px;
+    vertical-align: middle;
+}
+
+.sk_container .sk_bd .info .rest_goods span div {
+    width: 116px;
+    height: 12px;
+    background-color: #ed282e;
+}
+
+.sk_container .sk_bd button {
+    position: absolute;
+    bottom: -1px;
+    width: 290px;
+    height: 50px;
+    background-color: #b1191a;
+    border: 0;
+    margin-bottom: 1px;
+    font-size: 20px;
+    color: #ffffff;
+}
