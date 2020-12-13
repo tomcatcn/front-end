@@ -19,11 +19,15 @@
 
 .register_area {
     margin-top: 22px;
+    margin-bottom: 57px;
+    border: 1px solid #dfdfdf;
 }
 
 .register_area .hd {
     height: 42px;
-    background-color: pink;
+    background-color: #ececec;
+    border-bottom: 1px solid #dfdfdf;
+    ;
 }
 
 .register_area .hd h1 {
@@ -38,6 +42,129 @@
 }
 
 .register_area .bd {
-    height: 422px;
-    background-color: powderblue;
+    position: relative;
+    height: 479px;
+    padding-top: 56px;
+}
+
+.register_area .bd form>div {
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.register_area .bd input {
+    width: 240px;
+    height: 36px;
+    outline: 0;
+}
+
+.register_area .bd .phone {
+    margin-left: 342px;
+}
+
+.register_area .bd span {
+    font-size: 12px;
+    color: #df3033;
+}
+
+.sysbom {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-left: 10px;
+    margin-right: 5px;
+    line-height: 22px;
+    background-color: #df3033;
+    border-radius: 11px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.register_area .bd .sms {
+    margin-left: 313px;
+}
+
+.register_area .bd .pwd {
+    margin-left: 326px;
+}
+
+.register_area .bd .pwdag {
+    margin-left: 326px;
+}
+
+.register_area .bd .pwd div {
+    margin-left: 144px;
+    margin-top: 12px;
+}
+
+.weak,
+.middle,
+.strong {
+    display: inline-block;
+    width: 32px;
+    height: 16px;
+    text-align: center;
+    line-height: 16px;
+    color: #ffffff;
+}
+
+.weak {
+    background-color: #de1111;
+}
+
+.middle {
+    background-color: #40b83f;
+}
+
+.strong {
+    background-color: #f79100;
+}
+
+.register_area .bd .agree {
+    margin-left: 400px;
+    margin-top: 35px;
+}
+
+.register_area .bd .agree input {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+.register_area .bd .agree a {
+    font-size: 12px;
+    color: #1ba1e6;
+    margin-left: 15px;
+}
+
+.register_area .bd .submit button {
+    position: absolute;
+    left: 410px;
+    bottom: 56px;
+    width: 200px;
+    height: 34px;
+    outline: 0;
+    border: 0;
+    background-color: #c81623;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.links {
+    text-align: center;
+}
+
+.footer {
+    padding-top: 24px;
+    border-top: 1px solid #dfdfdf;
+}
+
+.footer .links a {
+    margin: 0 19px;
+}
+
+.footer .copyright {
+    text-align: center;
+    margin-top: 13px;
+    line-height: 20px;
 }
