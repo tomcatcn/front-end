@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #000000;
+        }
+        
+        @keyframes bear {
+            0% {}
+            /* 12.5% {
+                transform: translateX(-200px);
+            }
+            25% {
+                transform: translateX(-400px);
+            }
+            37% {
+                transform: translateX(-600px);
+            }
+            50% {
+                transform: translateX(-800px);
+            }
+            62.5% {
+                transform: translateX(-1000px);
+            }
+            75% {
+                transform: translateX(-1200px);
+            }
+            87.5% {
+                transform: translateX(-1400px);
+            } */
+            100% {
+                transform: translateX(-1600px);
+            }
+        }
+        
+        @keyframes bg_move {
+            0% {}
+            100% {
+                transform: translateX(-1440px);
+            }
+        }
+        
+        @keyframes move {
+            0% {
+                left: 0;
+            }
+            100% {
+                left: 30%;
+                /* transform: translateX(-50%); */
+            }
+        }
+        
+        div .bg2 .bg1 .bear {
+            position: absolute;
+            bottom: 0;
+            overflow: hidden;
+            width: 200px;
+            height: 100px;
+            animation: move 5s linear forwards;
+        }
+        
+        div .bg2 .bg1 .bear img {
+            animation: bear 1s steps(8) infinite;
+        }
+        
+        .bg2 {
+            position: relative;
+            width: 2400px;
+            background-color: pink;
+        }
+        
+        .bg2 img {
+            animation: bg_move 20s linear infinite;
+        }
+        
+        .bg1 {
+            position: absolute;
+            bottom: 0;
+            overflow: hidden;
+            width: 2400px;
+            height: 336px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="bg2">
+            <img src="bg2.png" alt="">
+            <div class="bg1">
+                <img src="bg1.png" alt="">
+                <div class="bear">
+                    <img src="bear.png" alt="">
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>

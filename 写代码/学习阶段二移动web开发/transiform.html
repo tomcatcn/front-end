@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 100px;
+        }
+        
+        .one {
+            position: relative;
+            width: 200px;
+            height: 50px;
+            background-color: antiquewhite;
+            transition: all 1s;
+        }
+        
+        .one::after {
+            content: '';
+            position: absolute;
+            top: 17px;
+            right: 15px;
+            width: 10px;
+            height: 10px;
+            transform: rotate(45deg);
+            border-bottom: 1px solid black;
+            border-right: 1px solid #000000;
+        }
+        
+        .two {
+            background-color: blue;
+        }
+        
+        .one:hover::after {
+            transform: rotate(225deg);
+        }
+        
+        .three {
+            float: left;
+            overflow: hidden;
+            width: 100px;
+            height: 100px;
+            margin: 0 15px;
+            border: 1px solid red;
+        }
+        
+        .three::before {
+            content: '内容';
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: rosybrown;
+            transform-origin: left bottom;
+            transform: rotate(180deg);
+            transition: all 0.6s;
+        }
+        
+        .three:hover::before {
+            transform: rotate(0deg);
+            background-color: salmon;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="one"></div>
+    <div class="two"></div>
+    <div class="three"></div>
+    <div class="three"></div>
+    <div class="three"></div>
+    <div class="three"></div>
+    <div class="three"></div>
+    <div class="three"></div>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @keyframes plue {
+            0% {}
+            50% {
+                width: 35px;
+                height: 35px;
+                opacity: 1;
+            }
+            100% {
+                width: 70px;
+                height: 70px;
+                opacity: 0;
+            }
+        }
+        
+        .city {
+            position: absolute;
+            top: 232px;
+            right: 194px;
+        }
+        
+        .tb {
+            top: 501px;
+            right: 79px;
+        }
+        
+        .gz {
+            bottom: -238px;
+            right: 192px;
+        }
+        
+        .city .dotted {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background-color: blue;
+            border-radius: 50%;
+        }
+        
+        .city div[class^='p'] {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            box-shadow: 0px 0px 6px blue;
+            border-radius: 50%;
+            animation: plue 1.5s linear infinite;
+        }
+        
+        .city .p2 {
+            animation-delay: 0.3s !important;
+        }
+        
+        .city .p3 {
+            animation-delay: 0.8s !important;
+        }
+        
+        .map {
+            position: relative;
+            width: 747px;
+            height: 614px;
+            margin: 0 auto;
+            background: url(map.png) no-repeat #000000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map">
+        <div class="city">
+            <div class="dotted"></div>
+            <div class="p1"></div>
+            <div class="p2"></div>
+            <div class="p3"></div>
+        </div>
+        <div class="city tb">
+            <div class="dotted"></div>
+            <div class="p1"></div>
+            <div class="p2"></div>
+            <div class="p3"></div>
+        </div>
+        <div class="city gz">
+            <div class="dotted"></div>
+            <div class="p1"></div>
+            <div class="p2"></div>
+            <div class="p3"></div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
