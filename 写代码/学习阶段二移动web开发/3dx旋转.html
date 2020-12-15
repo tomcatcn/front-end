@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            perspective: 500px;
+        }
+        
+        div {
+            position: relative;
+            width: 400px;
+            height: 200px;
+            margin: 100px auto;
+            transition: all 2s;
+            transform-style: preserve-3d;
+        }
+        
+        div:hover {
+            transform: rotateY(45deg);
+        }
+        
+        div img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 0.5s;
+        }
+        /* div img:hover {
+            transform: rotateZ(45deg);
+        } */
+        
+        p {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400px;
+            height: 300px;
+            background-color: red;
+            transform: rotateX(45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="11111.png" alt="">
+        <p>你好我不好</p>
+    </div>
+
+</body>
+
+</html>

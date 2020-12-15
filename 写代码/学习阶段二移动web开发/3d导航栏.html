@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul {
+            margin: 100px;
+        }
+        
+        li {
+            float: left;
+            list-style: none;
+            width: 100px;
+            height: 30px;
+            margin: 0 10px;
+            perspective: 500px;
+        }
+        
+        .box:hover {
+            transform: rotateX(90deg);
+        }
+        
+        .box {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: all 2s;
+            transform-style: preserve-3d;
+        }
+        
+        .front,
+        .bottom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .front {
+            z-index: 1;
+            background-color: red;
+            transform: translateZ(15px);
+        }
+        
+        .bottom {
+            background-color: blue;
+            transform: translateY(15px) rotateX(-90deg);
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <div class="box">
+                <div class="front">我是最美的</div>
+                <div class="bottom">才怪</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="front">我是最美的</div>
+                <div class="bottom">才怪</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="front">我是最美的</div>
+                <div class="bottom">才怪</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="front">我是最美的</div>
+                <div class="bottom">才怪</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="front">我是最美的</div>
+                <div class="bottom">才怪</div>
+            </div>
+        </li>
+
+    </ul>
+
+</body>
+
+</html>

@@ -1,0 +1,225 @@
+body {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 540px;
+    min-width: 320px;
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: -apple-system, Helvetica, sans-serif;
+    color: #666;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img {
+    vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+    color: #666666;
+}
+
+
+/*CSS3盒子模型*/
+
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+
+/*点击高亮我们需要清除清除  设置为transparent 完成透明*/
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/*在移动端浏览器默认的外观在iOS上加上这个属性才能给按钮和输入框自定义样式*/
+
+input {
+    -webkit-appearance: none;
+}
+
+
+/*禁用长按页面时的弹出菜单*/
+
+img,
+a {
+    -webkit-touch-callout: none;
+}
+
+.app {
+    height: 45px;
+}
+
+.app ul li {
+    float: left;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    color: #ffffff;
+    background-color: #333333;
+}
+
+.app ul li:nth-child(1) {
+    width: 8%;
+}
+
+.app ul li:nth-child(1) img {
+    width: 10px;
+}
+
+.app ul li:nth-child(2) {
+    width: 10%;
+}
+
+.app ul li:nth-child(2) img {
+    vertical-align: middle;
+    width: 30px;
+}
+
+.app ul li:nth-child(3) {
+    width: 57%;
+}
+
+.app ul li:nth-child(4) {
+    width: 25%;
+    background-color: #F63515;
+}
+
+.search-wrap {
+    position: fixed;
+    overflow: hidden;
+    height: 44px;
+    width: 100%;
+    max-width: 540px;
+    min-width: 320px;
+}
+
+.search-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 44px;
+}
+
+.search-login {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 44px;
+    text-align: center;
+    line-height: 44px;
+    color: #ffffff;
+}
+
+.search {
+    position: relative;
+    height: 30px;
+    margin: 0 50px;
+    margin-top: 7px;
+    background-color: chartreuse;
+    border-radius: 15px;
+}
+
+.search-btn::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 18px;
+    background: url(../images/s-btn.png) no-repeat;
+    background-size: 20px 18px;
+    margin: 14px 0 0 15px;
+}
+
+.jd-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 16px;
+    width: 20px;
+    height: 15px;
+    background: url(../images/jd.png) no-repeat;
+    background-size: 20px 15px;
+}
+
+.jd-icon::after {
+    position: absolute;
+    top: 0;
+    left: 29px;
+    content: '';
+    width: 1px;
+    height: 15px;
+    background-color: #cccccc;
+}
+
+.sou {
+    position: absolute;
+    width: 18px;
+    height: 15px;
+    top: 8px;
+    left: 54px;
+    background: url(../images/jd-sprites.png) no-repeat -83px 0;
+    background-size: 200px auto;
+}
+
+.banner img {
+    width: 100%;
+}
+
+.brand div {
+    float: left;
+    width: 33.33%;
+}
+
+.brand div img {
+    width: 100%;
+}
+
+.nav {
+    text-align: center;
+}
+
+.nav a {
+    float: left;
+    width: 20%;
+    margin: 10px 0;
+}
+
+.nav a span {
+    display: block;
+}
+
+.nav a img {
+    width: 40px;
+}
+
+.news a {
+    float: left;
+    box-sizing: border-box;
+}
+
+.news a img {
+    width: 100%;
+}
+
+.news a:first-child {
+    width: 50%;
+    border-right: 1px solid #cccccc;
+}
+
+.news a:nth-child(2) {
+    border-right: 1px solid #cccccc;
+}
+
+.news a:nth-child(n+2) {
+    width: 25%;
+}
