@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .one {
+            display: flex;
+            align-items: center;
+            height: 150px;
+            width: 500px;
+            margin: 100px auto;
+            background-color: plum;
+        }
+        
+        span {
+            height: 50px;
+            flex: 1;
+            background-color: purple;
+        }
+        
+        div span:nth-child(2) {
+            flex: 2;
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="one">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </div>
+</body>
+
+</html>
