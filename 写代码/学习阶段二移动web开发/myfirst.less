@@ -1,0 +1,33 @@
+@color:blue;
+@font32: 32px;
+@height:100px;
+div {
+    background-color: @color;
+    font-size: @font32;
+    height: @height;
+}
+
+.one {
+    height: 100px;
+    width: 200px;
+    a {
+        color: pink;
+        &:hover{
+            background-color: plum;
+        }
+    }
+    &::after {
+        content: '';
+    }
+}
+
+.two {
+    width: 100+20px;
+    height: 200 * 2rem + 10px;
+}
+.two::before {
+    content: '';
+}
+a:hover {
+    border: 1px;
+}

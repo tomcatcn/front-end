@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        li {
+            list-style: none;
+            float: left;
+            background-color: pink;
+        }
+        
+        @media screen and (max-width: 799px) {
+            .nav {
+                width: 100%;
+                overflow: hidden;
+            }
+            li {
+                width: 33.33%;
+            }
+        }
+        
+        @media screen and (min-width:800px) {
+            .nav {
+                width: 800px;
+                margin: 10px auto;
+                overflow: hidden;
+            }
+            li {
+                width: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <ul>
+            <li>导航栏1</li>
+            <li>导航栏2</li>
+            <li>导航栏3</li>
+            <li>导航栏4</li>
+            <li>导航栏5</li>
+            <li>导航栏6</li>
+            <li>导航栏7</li>
+            <li>导航栏8</li>
+        </ul>
+    </div>
+
+</body>
+
+</html>
