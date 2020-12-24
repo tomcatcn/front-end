@@ -1,7 +1,6 @@
 def fun1():
-    a = 1
-    b = 2
-    c = a + b
+    a = 2
+    return 3 < a < 7
 
 
 print(fun1())

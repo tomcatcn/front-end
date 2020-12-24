@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, 
+        initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="search-content">
+        <a href="" class="classfiy"></a>
+        <div class="search">
+            <input type="search" value="厨卫保暖季 哒哒哒">
+        </div>
+        <a href="" class="login">登陆</a>
+    </div>
+    <div class="banner">
+        <a href=""><img src="upload/banner.gif" alt=""></a>
+    </div>
+
+    <div class="ad">
+        <a href="#"><img src="upload/ad1.gif" alt=""></a>
+        <a href="#"><img src="upload/ad2.gif" alt=""></a>
+        <a href="#"><img src="upload/ad3.gif" alt=""></a>
+    </div>
+
+    <div class="nav" id="nav">
+        <a href="#"><img src="upload/nav1.png" alt="">爆款手机</a>
+        <a href="#"><img src="upload/nav1.png" alt="">爆款手机</a>
+        <a href="#"><img src="upload/nav1.png" alt="">爆款手机</a>
+        <a href="#"><img src="upload/nav1.png" alt="">爆款手机</a>
+        <a href="#"><img src="upload/nav1.png" alt="">爆款手机</a>
+        <a href="#"><img src="upload/nav1.png" alt="">爆款手机</a>
+        <a href="#"><img src="upload/nav1.png" alt="">爆款手机</a>
+        <a href="#"><img src="upload/nav1.png" alt="">爆款手机</a>
+        <a href="#"><img src="upload/nav1.png" alt="">爆款手机</a>
+        <a href="#"><img src="upload/nav1.png" alt="">爆款手机</a>
+    </div>
+
+</body>
+<script>
+    var div1 = document.getElementsByTagName('div')[0]
+    console.log(div1)
+    var nav = document.getElementById('nav')
+    console.log('nav:', nav)
+    var body_1 = document.body
+    console.log(body_1)
+    var root_html = document.documentElement
+    console.log(root_html)
+    var select1 = document.querySelector('.search-content .search input')
+    console.log(select1)
+    select1.onclick = function() {
+        alert('hello world');
+    }
+</script>
+
+
+</html>

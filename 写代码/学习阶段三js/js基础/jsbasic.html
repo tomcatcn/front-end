@@ -8,24 +8,25 @@
 </head>
 
 <body>
-
-
+    <ul>
+        <li>我是li</li>
+        <li>我是li</li>
+        <li>我是li</li>
+        <li>4我是li</li>
+    </ul>
+    <script>
+        // DOM 提供的方法（API）获取
+        var ul = document.querySelector('ul');
+        var lis = ul.querySelectorAll('li');
+        // 1. 子节点  childNodes 所有的子节点 包含 元素节点 文本节点等等
+        console.log(ul.childNodes);
+        console.log(ul.childNodes[0].nodeType);
+        console.log(ul.childNodes[1].nodeType);
+        // 2. children 获取所有的子元素节点 也是我们实际开发常用的
+        console.log(ul.children);
+        console.log(ul.children[0]);
+        console.log(ul.children[ul.children.length - 1]);
+    </script>
 </body>
-<script>
-    function Person(name) {
-        this.name = name;
-    }
-
-    function f1(x) { // x = p
-        console.log(x.name); // 2. 这个输出什么 ? 2.刘德华
-        x.name = "张学友";
-        console.log(x.name); // 3. 这个输出什么 ? 3.张学友
-    }
-    var p = new Person("刘德华");
-    console.log(p.name); // 1. 这个输出什么 ?1.刘德华 
-    f1(p);
-    console.log(p.name); // 4. 这个输出什么 ?4.张学友
-    var a = c = b = 9;
-</script>
 
 </html>
