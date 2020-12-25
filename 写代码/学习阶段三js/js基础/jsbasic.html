@@ -5,28 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            margin: 100px auto;
+        }
+    </style>
 </head>
 
 <body>
-    <ul>
-        <li>我是li</li>
-        <li>我是li</li>
-        <li>我是li</li>
-        <li>4我是li</li>
-    </ul>
+
     <script>
-        // DOM 提供的方法（API）获取
-        var ul = document.querySelector('ul');
-        var lis = ul.querySelectorAll('li');
-        // 1. 子节点  childNodes 所有的子节点 包含 元素节点 文本节点等等
-        console.log(ul.childNodes);
-        console.log(ul.childNodes[0].nodeType);
-        console.log(ul.childNodes[1].nodeType);
-        // 2. children 获取所有的子元素节点 也是我们实际开发常用的
-        console.log(ul.children);
-        console.log(ul.children[0]);
-        console.log(ul.children[ul.children.length - 1]);
+        console.log(1);
+        document.onclick = function() {
+            console.log('click');
+        }
+
+        setTimeout(function() {
+            console.log(3)
+        }, 3000)
+        console.log(2);
     </script>
+
 </body>
 
 </html>
