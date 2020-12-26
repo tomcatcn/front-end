@@ -18,7 +18,8 @@
             box-sizing: border-box;
         }
         
-        ul {
+        ul,
+        ol {
             margin: 0;
             padding: 0;
             list-style: none;
@@ -83,9 +84,45 @@
             margin: 5px auto -2px;
         }
         
-        .focus img {
-            margin-top: 44px;
+        .focus {
+            position: relative;
+            overflow: hidden;
             width: 100%;
+            padding-top: 44px;
+        }
+        
+        .focus img {
+            width: 100%;
+        }
+        
+        .focus ul {
+            top: 0;
+            left: 0;
+            width: 500%;
+            margin-left: -100%;
+        }
+        
+        .focus ul li {
+            width: 20%;
+            float: left;
+        }
+        
+        .focus ol {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+        
+        .focus ol li {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background-color: red;
+            border-radius: 2px;
+        }
+        
+        .current {
+            width: 15px!important;
         }
         
         .local-nav {
@@ -282,5 +319,18 @@
         
         .sale-bd .row img {
             vertical-align: middle;
+            width: 100%;
+        }
+        
+        .goback {
+            display: none;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+        }
+        
+        .goback img {
             width: 100%;
         }

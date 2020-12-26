@@ -118,21 +118,28 @@ header img {
 
 .news li:nth-child(1) {
     width: 50%;
+    height: 266px;
 }
 
-.news li a {
+.carousel,
+.carousel img {
+    width: 100%;
+    height: 266px!important;
+}
+
+.news li>a {
     display: block;
     position: relative;
     height: 128px;
     margin-bottom: 10px;
 }
 
-.news li a img {
+.news li>a img {
     width: 100%;
     height: 100%;
 }
 
-.news li:nth-child(1) a {
+.news li:nth-child(1)>a {
     height: 266px;
     font-size: 20px;
 }
@@ -147,7 +154,8 @@ header img {
     border-top: 1px solid #cccccc;
 }
 
-.news li a p {
+.news li a p,
+.carousel-caption {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -157,6 +165,11 @@ header img {
     font-size: 12px;
     color: #ffffff;
     padding: 5px 10px;
+}
+
+.carousel-caption {
+    padding-top: 9px;
+    font-size: 16px;
 }
 
 .publish p {

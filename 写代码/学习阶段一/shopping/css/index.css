@@ -6,8 +6,75 @@
 }
 
 .main .focus {
+    position: relative;
+    overflow: hidden;
     width: 721px;
     height: 455px;
+}
+
+.main .focus ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 500%;
+}
+
+.main .focus ul li {
+    float: left;
+}
+
+.focus .arrow_left,
+.focus .arrow_right {
+    display: none;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, .3);
+    font-family: 'icomoon';
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    z-index: 6;
+}
+
+.focus .arrow_left {
+    left: 0;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.focus .arrow_right {
+    right: 0;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.focus .little_point {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    height: 45px;
+    background: rgba(0, 0, 0, .3);
+    padding: 10px 5px;
+    border-radius: 25px;
+}
+
+.focus .little_point li {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 3px 10px;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+}
+
+.current {
+    background-color: #ffffff;
 }
 
 .main .newsflash {

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        span {
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn800">点击夏雨荷才走800</button>
+    <button class="btn300">点击夏雨荷才走300</button>
+    <div></div>
+    <span>夏雨荷</span>
+
+    <script>
+        function animation(obj, target, callback) {
+            clearInterval(obj.timer)
+
+
+            obj.timer = setInterval(function() {
+                if (obj.offsetLeft == target) {
+                    clearInterval(obj.timer);
+                    console.log('over')
+                    if (callback) {
+                        callback();
+                    }
+                }
+                var step = (target - obj.offsetLeft) / 10
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+
+
+                obj.style.left = obj.offsetLeft + step + 'px';
+            }, 30)
+
+        }
+
+        function change_color() {
+            span.style.backgroundColor = 'red';
+        }
+        var btn_800 = document.querySelector('.btn800')
+        var btn_300 = document.querySelector('.btn300')
+        var span = document.querySelector('span')
+
+        btn_800.addEventListener('click', function() {
+            animation(span, 800, change_color)
+        })
+
+        btn_300.addEventListener('click', function() {
+            animation(span, 300, change_color)
+        })
+    </script>
+</body>
+
+</html>
