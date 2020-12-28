@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src=""></script>
     <style>
         div {
             width: 200px;
@@ -13,20 +14,34 @@
     </style>
 </head>
 
+
+
 <body>
-
+    <ul>
+        <li>多个里面筛选几个</li>
+        <li>多个里面筛选几个</li>
+        <li>多个里面筛选几个</li>
+        <li>多个里面筛选几个</li>
+        <li>多个里面筛选几个</li>
+        <li>多个里面筛选几个</li>
+    </ul>
+    <ol>
+        <li>多个里面筛选几个</li>
+        <li>多个里面筛选几个</li>
+        <li>多个里面筛选几个</li>
+        <li>多个里面筛选几个</li>
+        <li>多个里面筛选几个</li>
+        <li>多个里面筛选几个</li>
+    </ol>
     <script>
-        console.log(1);
-        document.onclick = function() {
-            console.log('click');
-        }
-
-        setTimeout(function() {
-            console.log(3)
-        }, 3000)
-        console.log(2);
+        $(function() {
+            $("ul li:first").css("color", "red");
+            $("ul li:eq(2)").css("color", "blue");
+            $("ol li:odd").css("color", "skyblue");
+            $("ol li:even").css("color", "pink");
+        })
     </script>
-
 </body>
+
 
 </html>
