@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象 Tab</title>
+    <link rel="stylesheet" href="./styles/tab.css">
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+
+    <main>
+        <h4>
+            Js 面向对象 动态添加标签页
+        </h4>
+        <div class="tabsbox" id="tab">
+            <!-- tab 标签 -->
+            <nav class="fisrstnav">
+                <ul>
+                    <li class="liactive"><span>测试1</span><span class="iconfont icon-guanbi"></span></li>
+                    <li><span>测试2</span><span class="iconfont icon-guanbi"></span></li>
+                    <li><span>测试3</span><span class="iconfont icon-guanbi"></span></li>
+                </ul>
+                <div class="tabadd">
+                    <span>+</span>
+                </div>
+            </nav>
+
+            <!-- tab 内容 -->
+            <div class="tabscon">
+                <section class="conactive">测试1</section>
+                <section>测试2</section>
+                <section>测试3</section>
+            </div>
+        </div>
+    </main>
+    <script>
+        var that;
+        class Tab {
+            constructor(id) {
+                that = this;
+                this.main = document.querySelector(id)
+
+                this.add = this.main.querySelector('.tabadd')
+                this.ul = this.main.querySelector('ul')
+                this.tabscon = this.main.querySelector('.tabscon')
+                this.init();
+            }
+            init() {
+                //动态获取元素
+                that.updateNode()
+                this.add.onclick = this.addTab;
+                for (var i = 0; i < this.lis.length; i++) {
+                    this.lis[i].index = i;
+                    this.lis[i].onclick = this.toggleTab;
+                    this.removes[i].onclick = this.removeTab;
+                    this.spans[i].ondblclick = this.editTab;
+                    this.sections[i].ondblclick = this.editTab;
+
+                }
+
+            }
+            updateNode() {
+                this.lis = this.main.querySelectorAll('li')
+                this.sections = this.main.querySelectorAll('section')
+                this.removes = this.main.querySelectorAll('li span:last-child')
+                this.spans = this.main.querySelectorAll('li span:first-child')
+            }
+            clearClass() {
+                for (var i = 0; i < that.lis.length; i++) {
+                    this.lis[i].className = '';
+                    this.sections[i].className = '';
+                }
+            }
+            toggleTab() {
+                that.clearClass();
+                this.className = 'liactive';
+                that.sections[this.index].className = 'conactive';
+
+            }
+
+            addTab() {
+                that.clearClass()
+                var newli = '<li class="liactive"><span>新标签</span><span class="iconfont icon-guanbi"></span></li>'
+                var newsc = '<section class="conactive">测试' + Math.random() * 10 + '</section>'
+                that.ul.insertAdjacentHTML('beforeEnd', newli)
+                that.tabscon.insertAdjacentHTML('beforeEnd', newsc)
+                that.init()
+
+            }
+            removeTab(e) {
+                e.stopPropagation()
+                var index = this.parentNode.index
+                this.parentNode.remove();
+                that.sections[index].remove();
+                if (this.parentNode.className == '') {
+                    return
+                }
+                index--;
+                that.clearClass()
+                that.lis[index] && that.lis[index].click();
+
+            }
+            editTab() {
+                window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty
+                this.innerHTML = '<input type="text" name="" value="' + this.innerText + '" >'
+                var input = this.children[0]
+                input.select()
+                input.onblur = function() {
+                    this.parentNode.innerHTML = this.value
+                }
+                input.onkeyup = function(e) {
+                    if (e.keyCode == 13) {
+                        this.blur();
+                    }
+                }
+
+
+            }
+
+        }
+        var tar = new Tab('#tab')
+        console.log(tar)
+    </script>
+
+
+</body>
+
+</html>
