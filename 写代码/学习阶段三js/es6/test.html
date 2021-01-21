@@ -1,28 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJW4jsPlNKgv6jFm3B5Edp5ywgdqLWdmc&callback=initMap" async defer></script>
-
-    <script>
-        function fn() {
-            var num = 10;
-
-            function fun() {
-                console.log(num);
-            }
-            return fun;
-        }
-        var f = fn();
-        console.dir(f)
-        f();
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 
 <body>
-    <div id="googleMap" style="width:500px;height:380px;"></div>
-    <a href="./myfirst.php">php</a>
-
+    <div style="color: pink;">nihaogggg</div>
+    <script>
+        var div = document.querySelector('div')
+        console.log(document.body)
+        console.dir(document.querySelector('div'))
+        div.addEventListener('click', () => alert('1'))
+        div.addEventListener('click', () => alert('2'))
+    </script>
 </body>
 
 </html>

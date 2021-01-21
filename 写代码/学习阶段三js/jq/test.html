@@ -7,6 +7,10 @@
     <title>Document</title>
     <script src="jquery.min.js"></script>
     <style>
+        body {
+            height: 3000px;
+        }
+        
         .current {
             background-color: pink;
         }
@@ -16,40 +20,23 @@
 <body>
     <div></div>
     <ul>
-        <li>我们都是好孩子</li>
+        <li id="current">我们都是好孩子</li>
         <li>我们都是好孩子</li>
         <li>我们都是好孩子</li>
     </ul>
     <ol></ol>
+    <div class="top">top</div>
 
     <script>
         $(function() {
-            // (1) on可以绑定1个或者多个事件处理程序
-            // $("div").on({
-            //     mouseenter: function() {
-            //         $(this).css("background", "skyblue");
-            //     },
-            //     click: function() {
-            //         $(this).css("background", "purple");
-            //     }
-            // });
-            $("ul ").on("click", 'li', function() {
-                alert('1')
-            });
-
-            // (2) on可以实现事件委托（委派）
-            // click 是绑定在ul 身上的，但是 触发的对象是 ul 里面的小li
-            // $("ul li").click();
-            // $("ul").on("click", "li", function() {
-            //     alert(11);
-            // });
-
-            // // (3) on可以给未来动态创建的元素绑定事件
-            $("ol").on("click", "li", function() {
-                alert(11);
+            console.log($('#current'));
+            $('.top').click(function() {
+                alert('11');
+                $('html,body').animate({
+                    scrollTop: 0
+                }, 1)
             })
-            var li = $("<li>我是后来创建的</li>");
-            $("ul").append(li);
+
         })
     </script>
 </body>
