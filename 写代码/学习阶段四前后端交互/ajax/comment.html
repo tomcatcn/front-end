@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="jquery.min.js"></script>
+</head>
+
+<body style="padding: 15px;">
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">发表评论</h3>
+        </div>
+        <form class="panel-body">
+            <div>评论人:</div>
+
+            <input type="text" name="username" id="username" class="form-control" value="" placeholder="请输入评论人">
+            <div>评论内容</div>
+
+            <textarea name="content" id="comment_content" class="form-control" placeholder="请输入评论内容（最多120字）"></textarea>
+
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">发表评论</button>
+
+        </form>
+    </div>
+
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <span class="badge">评论时间：</span>
+            <span class="badge">评论人：</span> Item 1
+        </li>
+
+    </ul>
+
+
+
+</body>
+<script>
+    function getCommentList() {
+        $.get('http://www.liulongbin.top:3006/api/cmtlist', function(res) {
+            if (res.status != 200) {
+                alert('获取评论列表失败')
+            };
+            var html = [];
+            $.each(res.data, function(index, item) {
+                html.push(`<li class="list-group-item">
+            <span class="badge">评论时间：${item.time}</span>
+            <span class="badge">评论人：${item.username}</span> ${item.content}
+        </li>`)
+
+            });
+            $('.list-group').empty().html(html.join(''))
+        })
+    }
+    getCommentList();
+    $('.panel-body').on('submit', function(e) {
+        e.preventDefault();
+
+        var data = $(this).serialize();
+        $.post('http://www.liulongbin.top:3006/api/addcmt', data, function(res) {
+            if (res.status != 201) {
+                alert(res.msg)
+            };
+            console.log(res.msg)
+            $('.panel-body')[0].reset()
+            getCommentList();
+
+        })
+    })
+    var Person = (function() {
+        var instance = null;
+        return function(name, age) {
+            this.name = name;
+            this.age = age;
+            if (instance) {
+                return instance;
+            }
+            return instance = this;
+        }
+    })();
+    Person.prototype.sayHello = function() {
+        console.log(this.name)
+    };
+    var xiaoming = new Person("小明", 12);
+    var xiaohong = new Person("小红", 13)
+    console.log(xiaoming)
+    console.log(xiaohong)
+    console.log(xiaoming == xiaohong)
+    xiaohong.sayHello()
+    xiaoming.sayHello()
+</script>
+
+</html>

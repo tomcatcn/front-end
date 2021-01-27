@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+    <style>
+        .angel {
+            position: fixed;
+            top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="angel"><img src="./angel.gif" alt=""></div>
+
+</body>
+<script>
+    //节流
+    var timer = null
+
+    function throttle(e) {
+        if (timer) {
+            return
+        }
+        timer = setTimeout(function() {
+            $('.angel ').css({
+                left: e.pageX - 20 + 'px',
+                top: e.pageY - 20 + 'px'
+            })
+            timer = null
+            console.log(e.pageX, e.pageY)
+        }, 100)
+
+    }
+    $(document).on('mousemove', function(e) {
+
+
+        throttle(e)
+    })
+</script>
+
+</html>

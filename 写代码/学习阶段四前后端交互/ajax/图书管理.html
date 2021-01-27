@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="jquery.min.js"></script>
+</head>
+
+<body style="padding: 15px;">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">图书管理</h3>
+        </div>
+        <div class="panel-body form-inline">
+
+            <div class="input-group">
+                <div class="input-group-addon">书名</div>
+                <input type="text" class="form-control" id="inputBookName" placeholder="请输入书名">
+            </div>
+            <div class="input-group">
+                <div class="input-group-addon">作者</div>
+                <input type="text" class="form-control" id="inputAuthor" placeholder="请输入作者">
+            </div>
+            <div class="input-group">
+                <div class="input-group-addon">出版社</div>
+                <input type="text" class="form-control" id="inputPub" placeholder="请输入出版社">
+            </div>
+
+            <button type="button" class="btn btn-primary" id='addBook'>添加</button>
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>书名</th>
+                <th>作者</th>
+                <th>出版社</th>
+                <th>操作</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>nihao</td>
+                <td>nihao</td>
+                <td>nihao</td>
+                <td>nihao</td>
+                <td>nihao</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        $(function() {
+            var baseUrl = 'http://www.liulongbin.top:3006';
+
+            function getBookList() {
+                $.get(baseUrl + '/api/getbooks', function(res) {
+                    if (res.status != 200) {
+                        alert('获取图书列表失败')
+                    };
+                    var html = [];
+                    $.each(res.data, function(index, item) {
+                        html.push(`<tr>
+                <td>${item.id}</td>
+                <td>${item.bookname}</td>
+                <td>${item.author}</td>
+                <td>${item.publisher}</td>
+                <td><a href="javascript:" class="del">删除</a></td>
+
+            </tr>`)
+                    });
+                    html = html.join('');
+                    $('.table tbody').html(html);
+                })
+            };
+            getBookList();
+            // 删除
+            $('.table tbody').on('click', '.del', function() {
+
+                var id = $(this).parent().siblings()[0].innerText;
+                $.get(baseUrl + '/api/delbook', {
+                    id: id
+                }, function(res) {
+                    if (res.status != 200) {
+                        alert('删除失败')
+                    };
+                    alert(res.msg);
+                    getBookList();
+                })
+            });
+            // 添加
+            $('#addBook').on('click', function() {
+                var bookname = $('#inputBookName').val().trim();
+                var author = $('#inputAuthor').val().trim();
+                var pub = $('#inputPub').val().trim();
+                if (bookname && author && pub) {
+                    // baseUr + '/api/addbook', {
+
+                    // }, function(res) {
+                    //     console.log(res.status)
+                    // }
+                    $.post(baseUrl + '/api/addbook', {
+                            bookname: bookname,
+                            author: author,
+                            publisher: pub
+                        }, function(res) {
+                            if (res.status != 201) {
+                                alert('add false')
+                            }
+                            alert('add sucess');
+                            getBookList();
+                        })
+                        // $.post(baseUrl + '/api/getbooks', function(res) {
+                        //     console.log(res)
+                        // })
+
+                } else {
+                    alert('请填写完整信息')
+                }
+            })
+
+
+        })
+    </script>
+
+</body>
+
+</html>

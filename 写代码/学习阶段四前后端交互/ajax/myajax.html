@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function myAjax(options) {
+            function reseloveData(data) {
+                var arr = []
+                for (k in data) {
+                    arr.push(k + '=' + data[k])
+                }
+                return arr.join('&')
+
+            }
+            var xhr = new XMLHttpRequest()
+            var qs = reseloveData(options.data)
+
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    options.success(JSON.parse(xhr.responseText))
+                }
+            }
+            if (options.method == 'GET') {
+                xhr.open('GET', options.url + '?' + qs)
+                xhr.send()
+
+            } else if (options.method == 'POST') {
+                xhr.open('POST', options.url)
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                xhr.send(qs)
+
+            }
+
+        }
+        myAjax({
+            method: 'POST',
+            url: 'http://www.liulongbin.top:3006/api/addbook',
+            data: {
+                bookname: 'xiaoxiao',
+                author: 'xiao',
+                publisher: 'heihei'
+            },
+            success: function(res) {
+                console.log(res)
+            }
+        })
+    </script>
+
+</body>
+
+</html>
