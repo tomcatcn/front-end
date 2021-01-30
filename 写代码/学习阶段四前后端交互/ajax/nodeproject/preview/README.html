@@ -1,0 +1,563 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<p>#技术文档收集平台</p>
+<h2 id="-">目录</h2>
+<p>[TOC]</p>
+<h2 id="-">一、概述</h2>
+<p>&emsp;&emsp;&emsp;&emsp;随着技术的不断学习,不断总结，不断地书写技术文档，会发现</p>
+<p>文档的收集与归纳越来越麻烦，查找起来也是很不方便，所有为了解决这个情况</p>
+<p>特地打造了这个文档收集平台，方便大家收集文档，分享，评论等等。</p>
+<p>总体框架采用前后端分离，后端只负责数据的处理，前端负责渲染页面与用户交互。</p>
+<p>后端负责处理的项目模块设计如下
+模块|功能|API
+-|-|
+用户模块|负责处理用户数据|users
+文章模块|负责处理文章数据|topic</p>
+<p>留言模块|负责处理留言数据|
+评论模块|负责处理评论数据|
+相册模块|负责处理相册数据|</p>
+<h2 id="-">二、开发规范</h2>
+<ol>
+<li>后端环境</li>
+</ol>
+<p>Python 3.6.9 + django 1.11.8 + mysql 5.7.28 + Ubuntu18.04.3 LTS + vim</p>
+<ol start="2">
+<li>通信协议</li>
+</ol>
+<p>http</p>
+<ol start="3">
+<li>通信格式</li>
+</ol>
+<p>json</p>
+<ol start="4">
+<li>API规范</li>
+</ol>
+<p>一定成都上符合RESTful定义</p>
+<h2 id="-">三、使用技术</h2>
+<h3 id="3-1-token">3.1 token</h3>
+<h3 id="3-2-cors">3.2 CORS</h3>
+<h3 id="3-3-redis-">3.3 redis分布式锁</h3>
+<h2 id="-">四、用户模块</h2>
+<h3 id="4-1-">4.1 数据库结构</h3>
+<pre><code class="lang-python">def default_sign():
+    signs = [&#39;我爱中国&#39;,&#39;我是最帅的&#39;,&#39;我是沙雕,我快乐&#39;]
+    return random.choice(signs)
+
+class UsersProfile(models.Model):
+    username = models.CharField(&#39;用户名&#39;,max_length=30,primary_key=True)
+    nickname = models.CharField(&#39;昵称&#39;,max_length=50)
+    email = models.EmailField(&#39;邮箱&#39;)
+    password = models.CharField(&#39;密码&#39;,max_length=32)
+    sign = models.CharField(&#39;个人签名&#39;,max_length=50,default=default_sign)
+    info = models.CharField(&#39;个人描述&#39;,max_length=150)
+    # avatar = models.ImageField(&#39;头像&#39;,upload_to=&#39;&#39;)
+    created_time = models.DateTimeField(&#39;创建时间&#39;,auto_now_add=True)
+    updated_time = models.DateTimeField(&#39;修改时间&#39;,auto_now=True)
+    isActived = models.BooleanField(&#39;激活&#39;,default=True)
+    # upload_to 指定位置存储位置 MEDIA_ROOT + upload_to 的值
+    avatar = models.ImageField(&#39;头像&#39;,upload_to=&#39;avatar&#39;,default=&#39;&#39;)
+
+    class Meta:
+        db_table = &#39;user_profile&#39;
+
+    def __str__(self):
+        return &#39;&lt;用户:&gt;&#39;.format(self.username)
+</code></pre>
+<h3 id="4-2-api">4.2 API</h3>
+<h4 id="4-2-1-">4.2.1 注册接口</h4>
+<ul>
+<li>URL:<a href="http://127.0.0.1:8000/api/v1/users">http://127.0.0.1:8000/api/v1/users</a></li>
+<li>请求方式 POST</li>
+<li>请求格式 json <blockquote>
+<p>{‘username’: jack, ‘email’: ‘<a href="mailto:abc@qq.com">abc@qq.com</a>’, ‘password1’: ‘abcdef’,‘password2’: ‘abcdef’}</p>
+</blockquote>
+</li>
+<li>响应格式<blockquote>
+<p>{‘code’: 200 , ‘username’: ‘abc’, ’data’: {‘token’:‘asdadasd.cvreijvd.dasdadad’} }</p>
+</blockquote>
+</li>
+<li>异常码<blockquote>
+<p>异常码|含义|备注
+-----|----|----
+100101|无用户名|xxxx
+100102|两次输入密码不一致|xxxx</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="4-2-2-">4.2.2 获取用户信息接口</h4>
+<ul>
+<li>URL:<a href="http://127.0.0.1:8000/api/v1/users/">http://127.0.0.1:8000/api/v1/users/</a><username></li>
+<li>请求方式 GET</li>
+<li>请求格式  <blockquote>
+<p>直接 GET 请求，可获取全部用户数据</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>GET 请求后添加查询字符串，可根据具体查询字符串 查询：<a href="http://127.0.0.1:8000/v1/users/">http://127.0.0.1:8000/v1/users/</a><username>?nickname=1</p>
+<ul>
+<li>响应格式
+全量响应： {‘code’:200,‘username’:’xiaoming’,‘data’:{‘nickname’:’abc’, ’sign’:’hellow’, ‘avatar’: ’abc.jpg’, ‘info’: ‘hahahahah’}}</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>局部响应：{‘code’:200, ‘username’:’123’, ‘data’:{‘nickname’:’abcde’} }</p>
+<ul>
+<li>异常码
+异常码|含义|备注
+-----|----|----
+100101|无用户名|xxxx</li>
+</ul>
+</blockquote>
+<h4 id="4-2-3-">4.2.3 修改个人用户接口</h4>
+<ul>
+<li>URL:<a href="http://127.0.0.1:8000/api/v1/users/">http://127.0.0.1:8000/api/v1/users/</a><username></li>
+<li>请求方式 PUT</li>
+<li>请求格式 json<blockquote>
+<p> 该请求需客户端在 HTTP header 里添加 token, 格式如：Authorization ： token</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>{‘sign’:xxx, ‘info’:xxxx, ‘nickname’:xxxx}</p>
+<ul>
+<li>响应格式 json
+{‘code’:200, ‘username’:’char’}</li>
+<li>异常码
+异常码|含义|备注
+-----|----|----
+100103|空提交|xxxx</li>
+</ul>
+</blockquote>
+<h4 id="4-2-4-">4.2.4 上传用户头像接口</h4>
+<ul>
+<li>URL:<a href="http://127.0.0.1:8000/api/v1/users/">http://127.0.0.1:8000/api/v1/users/</a><username>/avatar</li>
+<li>请求方式 POST multipart/form-data</li>
+<li>请求格式 json <blockquote>
+<p> 该请求需客户端在 HTTP header 里添加 token, 格式如：Authorization ： token</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>{‘avatar’:表单中图片的名字}</p>
+<ul>
+<li>响应格式
+{‘code’:200, ‘username’:’char’}</li>
+<li>异常码
+异常码|含义|备注
+-----|----|----
+100103|空提交|xxxx</li>
+</ul>
+</blockquote>
+<h4 id="4-2-5-">4.2.5 登录接口</h4>
+<ul>
+<li>URL:<a href="http://127.0.0.1:8000/api/v1/tokens">http://127.0.0.1:8000/api/v1/tokens</a></li>
+<li>请求方式 POST </li>
+<li>请求格式 json <blockquote>
+<p>{‘username’: ‘xxx’, ‘password’: ‘yyy’}</p>
+</blockquote>
+</li>
+<li>响应格式<blockquote>
+<p>{‘code’: 200, ‘username’: ‘asc’, ‘data’: {‘token’: ‘zdsadasd’}}</p>
+</blockquote>
+</li>
+<li>异常码<blockquote>
+<p>异常码|含义|备注
+-----|----|----
+100103|空提交|xxxx</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="4-2-6-">4.2.6 注意问题</h4>
+<ol>
+<li>注意个别客户端请求需要添加 token 传回服务器端，否则异
+常</li>
+<li>如何保证同时只有一个客户端使用<blockquote>
+<p>1.在用户表中添加字段logtime DatetimeField</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>2.用户登录时候，把logtime字段更新为登录时间，生成token时候，私有声明里添加logtime</p>
+</blockquote>
+<blockquote>
+<p>3.用户再另一个客户端登录时候，检查token中的logtime是否与用户表的一致，</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>如果不相等，则返回用户重新登录，更新用户表登录时间，签发新的token。</p>
+</blockquote>
+</blockquote>
+<h2 id="-">五、文章模块</h2>
+<h3 id="5-1-">5.1数据结构</h3>
+<h3 id="5-2-api">5.2 API</h3>
+<h4 id="5-2-1-">5.2.1 发表文章接口</h4>
+<ul>
+<li>URL:<a href="http://127.0.0.1:8000/api/v1/topics/">http://127.0.0.1:8000/api/v1/topics/</a><username></li>
+<li>请求方式 POST </li>
+<li>请求格式 json<blockquote>
+<p>该请求需客户端在 HTTP header 里添加 token, 格式如：Authorization ： token </p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>{‘title: ‘haha’, ‘category’: ‘tec’, ‘limit’: ‘public’, ‘content’: ‘abcdef<p>’ ,‘content_text’: ‘abcdef’}</p>
+<ul>
+<li>响应格式
+{‘code’: 200 , ‘username’: ‘abc’, }</li>
+<li>异常码
+异常码|含义|备注
+-----|----|----
+300101|未登录|xxxx</li>
+</ul>
+</blockquote>
+<h4 id="5-2-2-">5.2.2 获取用户文章列表接口</h4>
+<ul>
+<li>URL:<a href="http://127.0.0.1:8000/api/v1/topics/">http://127.0.0.1:8000/api/v1/topics/</a><username>?category=[tec|no-tec]</li>
+<li>请求方式 GET </li>
+<li>请求格式 <blockquote>
+<p><a href="http://127.0.0.1:8000/api/v1/topics/">http://127.0.0.1:8000/api/v1/topics/</a><username> 可获取用户全量数据</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><a href="http://127.0.0.1:8000/v1/topics/">http://127.0.0.1:8000/v1/topics/</a><username>?category=[tec|no-tec]可获取用户具体分类的数据， 技术(tec) 或 非技术 (no-tec)</p>
+<ul>
+<li>响应格式<pre><code class="lang-json">{‘code’:200,’data’:{‘nickname’:’abc’, ’topics’:[{‘id’:1,’title’:’a’,‘category’: ‘tec’, ‘created_time’: ‘2018-09-03 10:30:20’, ‘introduce’:‘aaa’, ‘nickname’:’abc’}]}}
+</code></pre>
+</li>
+<li>异常码
+异常码|含义|备注
+-----|----|----
+300101|未登录|xxxx</li>
+</ul>
+</blockquote>
+<h4 id="5-2-3-">5.2.3 获取用户具体文章内容接口</h4>
+<ul>
+<li>URL:<a href="http://127.0.0.1:8000/api/v1/topics/">http://127.0.0.1:8000/api/v1/topics/</a><username>?t_id=1111</li>
+<li>请求方式 GET </li>
+<li><p>请求格式 </p>
+<blockquote>
+<p><a href="http://127.0.0.1:8000/api/v1/topics/">http://127.0.0.1:8000/api/v1/topics/</a><username> 地址后方添加查询字符串 t_id , 值为具体博客文章的 id</p>
+</blockquote>
+</li>
+<li><p>响应格式</p>
+<pre><code class="lang-json">{ &quot;code&quot;: 200, 
+&quot;data&quot;: {
+   &quot;nickname&quot;: &quot;guoxiaonao&quot;,
+   &quot;title&quot;: &quot;我的第一次&quot;, 
+  &quot;category&quot;: &quot;tec&quot;, 
+  &quot;created_time&quot;: &quot;2019-06-03&quot;, 
+  &quot;content&quot;: &quot;&lt;p&gt;我的第一次，哈哈哈哈哈&lt;br&gt;&lt;/p&gt;&quot;, 
+  &quot;introduce&quot;: &quot;我的第一次，哈哈哈哈哈&quot;, 
+  &quot;author&quot;: &quot;guoxiaonao&quot;, &quot;next_id&quot;: 2, 
+  &quot;next_title&quot;: &quot;我的第二次&quot;, 
+  &quot;last_id&quot;: null, 
+  &quot;last_title&quot;: null, 
+  &quot;messages&quot;: [
+      {&quot;id&quot;: 1, &quot;content&quot;: &quot;&lt;p&gt;写得不错啊，大哥&lt;br&gt;&lt;/p&gt;&quot;, &quot;publisher&quot;: &quot;guoxiaonao&quot;, 
+      &quot;publisher_avatar&quot;: &quot;avatar/头像 2.png&quot;, 
+      &quot;reply&quot;: [
+          { &quot;publisher&quot;: &quot;guoxiaonao&quot;, 
+          &quot;publisher_avatar&quot;: &quot;avatar/头像 2.png&quot;, 
+          &quot;created_time&quot;: &quot;2019-06-03 07:52:16&quot;, 
+          &quot;content&quot;: &quot;谢谢您的赏识&quot;, 
+          &quot;msg_id&quot;: 2
+           }
+              ],
+       &quot;created_time&quot;: &quot;2019-06-03 07:52:02&quot;
+      }
+  ],
+  &quot;messages_count&quot;: 2
+ }
+}
+</code></pre>
+</li>
+<li>异常码<blockquote>
+<p>异常码|含义|备注
+-----|----|----
+300106|无文章|xxxx</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="5-2-4-">5.2.4 删除文章接口</h4>
+<ul>
+<li>URL:- URL:<a href="http://127.0.0.1:8000/api/v1/topics/">http://127.0.0.1:8000/api/v1/topics/</a><username>?t_id=1111</li>
+<li>请求方式 DELETE </li>
+<li>请求格式 <blockquote>
+<p>该请求需客户端在 HTTP header 里添加 token, 格式如：Authorization ： token </p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><a href="http://127.0.0.1:8000/v1/topcis/">http://127.0.0.1:8000/v1/topcis/</a><username> 地址后方添加查询字符串 t_id , 值为具体博客文章的 id</p>
+<ul>
+<li>响应格式
+{‘code’: 200 , ‘username’: ‘abc’, }</li>
+<li>异常码
+异常码|含义|备注
+-----|----|----
+300107|文章不存在|xxxx</li>
+</ul>
+</blockquote>
+<h4 id="5-2-5-">5.2.5 常见问题</h4>
+<ol>
+<li>注意个别客户端请求需要添加 token 传回服务器端，否则异常</li>
+</ol>
+<h2 id="-">六、留言模块</h2>
+<h3 id="6-1-">6.1数据结构</h3>
+<pre><code class="lang-python">class Message(models.Model):
+    content = models.CharField(&#39;留言内容&#39;,max_length=100)
+    created_time = models.DateTimeField(&#39;留言创建时间&#39;,auto_now_add=True)
+    parent_message = models.IntegerField(&#39;留言父ID&#39;,default=0)
+    # 外建关联用户
+    publisher = models.ForeignKey(UsersProfile)
+    # 外建关联文章
+    topic = models.ForeignKey(Topic)
+
+    class Meta:
+        db_table = &#39;message&#39;
+
+    def __str__(self):
+        return &#39;&lt;留言：{}&gt;&#39;.format(self.content)
+</code></pre>
+<h4 id="6-2-1-">6.2.1 发表文章留言接口</h4>
+<ul>
+<li>URL:- URL:<a href="http://127.0.0.1:8000/api/v1/messages/">http://127.0.0.1:8000/api/v1/messages/</a>&lt;topic_id&gt;</li>
+<li>请求方式 POST</li>
+<li>请求格式 json<pre><code class="lang-json">{‘content’:&#39;asdfgc&#39;,’parent_id’:1}
+</code></pre>
+</li>
+<li>响应格式<blockquote>
+<p>{‘code’: 200 , ‘data’: ‘{}’, }</p>
+</blockquote>
+</li>
+<li>异常码<blockquote>
+<p>异常码|含义|备注
+-----|----|----
+400107|留言为空|xxxx</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="-">七、相册模块</h2>
+<h3 id="7-1-">7.1数据结构</h3>
+<h4 id="7-2-1-">7.2.1 获取相册接口</h4>
+<ul>
+<li>URL:- URL:<a href="http://127.0.0.1:8000/api/v1/photos/">http://127.0.0.1:8000/api/v1/photos/</a><username>?photos_id=2</li>
+<li>请求方式 GET</li>
+<li>请求格式 <blockquote>
+<p>该请求不加参数，返回用户所有的相册信息</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><a href="http://127.0.0.1:8000/api/v1/photos/">http://127.0.0.1:8000/api/v1/photos/</a><username>?photos_id=2地址后方添加查询字符串 photos_id , 值为具体相册的id，返回该相册所有图片
+<a href="http://127.0.0.1:8000/api/v1/photos/">http://127.0.0.1:8000/api/v1/photos/</a><username>?photos_id=2&amp;photo_id=15地址后方添加查询字符串 ,返回photo_id的图片</p>
+<ul>
+<li>响应格式
+返回相册列表<pre><code class="lang-json">{‘code’: 200 , 
+ ‘username’:&#39;abc&#39;,
+  ‘data’: [
+          {&#39;photos_id&#39;:2,&#39;photos_name&#39;:&#39;abc&#39;,&#39;photos_cover&#39;:&#39;http://xxxx&#39;},
+          {&#39;photos_id&#39;:3,&#39;photos_name&#39;:&#39;cbd&#39;,&#39;photos_cover&#39;:&#39;http://xxxx&#39;},
+          {&#39;photos_id&#39;:4,&#39;photos_name&#39;:&#39;efg&#39;,&#39;photos_cover&#39;:&#39;http://xxxx&#39;},
+           ], 
+}
+</code></pre>
+返回相册所有图片<pre><code class="lang-json">{‘code’: 200 , 
+ ‘username’:&#39;abc&#39;,
+  &#39;photos_id&#39;:1,
+  &#39;photos_name&#39;:&#39;abcd&#39;,
+  ‘data’: [
+           {&#39;photo_id&#39;:2,&#39;photo_url&#39;:&#39;http:xxxxxx&#39;},
+           {&#39;photo_id&#39;:3,&#39;photo_url&#39;:&#39;http:xxxxxx&#39;},
+           {&#39;photo_id&#39;:4,&#39;photo_url&#39;:&#39;http:xxxxxx&#39;},
+           ], 
+}
+</code></pre>
+返回具体某一张图片<pre><code class="lang-json">{‘code’: 200 , 
+ &#39;username&#39;:&#39;abc&#39;,
+  &#39;photos_id&#39;:1,
+  &#39;photos_name&#39;:&#39;abcd&#39;,
+  &#39;data&#39;: [
+          {&#39;photo_id&#39;:2,&#39;photo_url&#39;:&#39;http:xxxxxx&#39;},
+          {&#39;next_photo_id&#39;:null,&#39;photo_url&#39;:&#39;&#39;},
+          {&#39;last_photo_id&#39;:null,&#39;photo_url&#39;:&#39;&#39;},
+           ], 
+}
+</code></pre>
+</li>
+<li>异常码
+异常码|含义|备注
+-----|----|----
+700101|留言为空|xxxx</li>
+</ul>
+</blockquote>
+<h4 id="7-2-2-">7.2.2 创建相册接口</h4>
+<ul>
+<li>URL:- URL:<a href="http://127.0.0.1:8000/api/v1/photos/">http://127.0.0.1:8000/api/v1/photos/</a><username></li>
+<li>请求方式 POST</li>
+<li>请求格式 json<pre><code class="lang-json">{&#39;photos_name&#39;:&#39;asdfgc&#39;,&#39;username&#39;:&#39;abcd&#39;}
+</code></pre>
+</li>
+<li>响应格式<blockquote>
+<p>{‘code’: 200 , &#39;photos_id&#39;:2 ,‘data’: ‘’, }</p>
+</blockquote>
+</li>
+<li>异常码<blockquote>
+<p>异常码|含义|备注
+-----|----|----
+700107|创建失败|xxxx</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="7-2-3-">7.2.3 修改个人相册接口</h4>
+<ul>
+<li>URL:<a href="http://127.0.0.1:8000/api/v1/photos/">http://127.0.0.1:8000/api/v1/photos/</a><username></li>
+<li>请求方式 PUT</li>
+<li>请求格式 json<blockquote>
+<p> 该请求需客户端在 HTTP header 里添加 token, 格式如：Authorization ： token</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>{‘photos_name’:xxx, ‘photos_id’:6}</p>
+<ul>
+<li>响应格式 json
+{‘code’:200, ‘username’:’char’}</li>
+<li>异常码
+异常码|含义|备注
+-----|----|----
+700130|空提交|xxxx</li>
+</ul>
+</blockquote>
+<h4 id="7-2-4-">7.2.4 删除相册接口</h4>
+<ul>
+<li>URL:- URL:<a href="http://127.0.0.1:8000/api/v1/photos/">http://127.0.0.1:8000/api/v1/photos/</a><username>?photos_id=1111</li>
+<li>请求方式 DELETE </li>
+<li>请求格式 <blockquote>
+<p>该请求需客户端在 HTTP header 里添加 token, 格式如：Authorization ： token </p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><a href="http://127.0.0.1:8000/api/v1/photos/">http://127.0.0.1:8000/api/v1/photos/</a><username> 地址后方添加查询字符串photos_i , 值为具体相册的id,如果加上photo_id就是删除具体的哪一张图片</p>
+<ul>
+<li>响应格式
+{‘code’: 200 , ‘username’: ‘abc’, }</li>
+<li>异常码
+异常码|含义|备注
+-----|----|----
+300107|文章不存在|xxxx</li>
+</ul>
+</blockquote>
+<h4 id="7-2-5-">7.2.5 上传图片接口</h4>
+<ul>
+<li>URL:- URL:<a href="http://127.0.0.1:8000/api/v1/photos/">http://127.0.0.1:8000/api/v1/photos/</a><username>/picture?photos_id=1245</li>
+<li>请求方式 POST multipart/form-data</li>
+<li>请求格式 json<blockquote>
+<p>该请求需客户端在 HTTP header 里添加 token, 格式如：Authorization ： token </p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><a href="http://127.0.0.1:8000/v1/photos/">http://127.0.0.1:8000/v1/photos/</a><username>/picture?photos_id=1245 地址后方添加查询字符串photos_id , 值为具体相册的 id</p>
+</blockquote>
+<blockquote>
+<p>{‘picture’:表单中图片的名字}</p>
+<ul>
+<li>响应格式
+{‘code’: 200 , ‘username’: ‘abc’, }</li>
+<li>异常码
+异常码|含义|备注
+-----|----|----
+700107|相册不存在|xxxx</li>
+</ul>
+</blockquote>
+
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>

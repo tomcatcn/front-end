@@ -1,0 +1,9 @@
+{
+    "name": "pan-Tools",
+    "version": "1.0.0",
+    "description": "提供了日期格式化，HTML特殊字符转义还原",
+    "main": "index.js",
+    "keywords": ["escape", "pan", "dateFormat"],
+    "author": "pan",
+    "license": "ISC"
+}

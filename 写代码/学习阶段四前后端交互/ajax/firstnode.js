@@ -27,3 +27,7 @@ f.readFile(__dirname + '/成绩.txt', 'utf-8', function(err, result) {
 })
 console.log('-----------------')
 console.log(__dirname)
+
+module.exports = {
+    username: 'xiaociao'
+}
