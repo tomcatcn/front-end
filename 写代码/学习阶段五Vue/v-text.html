@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="./js/vue.js"></script>
+
+<body>
+    <div id="app">
+        <!--  
+            注意:在指令中不要写插值语法  直接写对应的变量名称 
+            在 v-text 中 赋值的时候不要在写 插值语法
+            一般属性中不加 {{}}  直接写 对应 的数据名 
+        -->
+        <p v-text="msg"></p>
+        <p>
+            <!-- Vue  中只有在标签的 内容中 才用插值语法 -->
+            {{msg}}
+        </p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'Hello Vue.js'
+            }
+        });
+    </script>
+</body>
+
+</html>

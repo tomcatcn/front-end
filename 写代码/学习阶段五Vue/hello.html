@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    /* 
+      1、通过属性选择器 选择到 带有属性 v-cloak的标签  让他隐藏
+   */
+    
+    [v-cloak] {
+        /* 元素隐藏    */
+        display: none;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <h1>简单计算器</h1>
+        数值A:<input type="text" v-model="a"><br> 数值B：
+        <input type="text" v-model="b"><br>
+        <button type="button" @click="sum">计算</button>
+        <div v-cloak>计算结果:{{total}}</div>
+    </div>
+    <script src="./js/vue.js">
+    </script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                a: null,
+                b: null,
+                total: null
+            },
+            methods: {
+                sum: function() {
+                    this.total = parseInt(this.a) + parseInt(this.b)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

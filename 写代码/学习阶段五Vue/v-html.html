@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="./js/vue.js"></script>
+
+<body>
+    <div id="app">
+
+        <p v-html="html"></p>
+        <!-- 输出：html标签在渲染的时候被解析 -->
+
+        <p>{{message}}</p>
+        <!-- 输出：<span>通过双括号绑定</span> -->
+
+
+        <p v-text="text"></p>
+        <!-- 输出：<span>html标签在渲染的时候被源码输出</span> -->
+    </div>
+    <script>
+        let app = new Vue({　　
+            el: "#app",
+            　　data: {　　　　
+                message: "<span>通过双括号绑定</span>",
+                html: "<span>html标签在渲染的时候被解析</span>",
+                text: "<span>html标签在渲染的时候被源码输出</span>",
+                　　
+            } 
+        });
+    </script>
+</body>
+
+</html>
