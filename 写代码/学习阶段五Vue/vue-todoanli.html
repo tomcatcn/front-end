@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <!-- HTML   -->
+    <section id="todoapp" class="todoapp">
+        <header class="header">
+            <h1>todos</h1>
+            <input placeholder="What needs to be done?" class="new-todo" @keyup.enter="handle" v-model="title">
+        </header>
+        <section class="main">
+            <input id="toggle-all" type="checkbox" class="toggle-all" @click='toggle_all' v-model="all_completed">
+            <label for="toggle-all">Mark all as complete</label>
+            <ul class="todo-list">
+                <li class="" :class="{completed:item.completed,editing:currentIndex == item.id?true:false}" v-for="(item,index) in todos" :key="index" @dblclick="edit_content(item.id)">
+                    <div class="view"><input type="checkbox" class="toggle" value="false" v-model="item.completed">
+                        <label>{{item.title}}</label>
+                        <button class="destroy" @click="destroy(item.id)"></button>
+                    </div>
+                    <input class="edit" value="" v-model="item.title" @keyup.enter="edit_finish(item.id,item.title)">
+                </li>
+
+            </ul>
+        </section>
+        <footer class="footer">
+            <span class="todo-count">
+                <strong>{{lefts}}</strong> item left</span>
+            <ul class="filters">
+                <li><a href="#/" :class="{selected:selected_index == select_indexs[0] ? true:false}" @click='all_item'>All</a></li>
+                <li><a href="#/active" :class="{selected:selected_index == select_indexs[1] ? true:false}" @click='active_item'>Active</a></li>
+                <li><a href="#/completed" :class="{selected:selected_index == select_indexs[2] ? true:false}" @click='completed_item'>Completed</a></li>
+            </ul>
+            <button class="clear-completed" :class="{selected:selected_index == select_indexs[3] ? true:false}" @click='clear_completed'>Clear completed</button>
+        </footer>
+    </section>
+
+
+
+    <!---   2CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+
+    <!---   3、 提供的数据  -->
+
+    <script>
+        var vm = new Vue({
+            el: "#todoapp",
+            data: {
+                all_completed: false,
+                selected_index: 1,
+                select_indexs: [1, 2, 3, 4],
+                currentIndex: '',
+                edit_flag: false,
+                title: '',
+                todos: [{
+                    id: 1,
+                    title: '吃饭',
+                    completed: false
+                }, {
+                    id: 2,
+                    title: '睡觉',
+                    completed: false
+                }, {
+                    id: 3,
+                    title: '打豆豆',
+                    completed: true
+                }],
+                active_todos: '',
+                completed_todos: '',
+                all_todos: [{
+                    id: 1,
+                    title: '吃饭',
+                    completed: false
+                }, {
+                    id: 2,
+                    title: '睡觉',
+                    completed: false
+                }, {
+                    id: 3,
+                    title: '打豆豆',
+                    completed: true
+                }],
+            },
+            methods: {
+                handle: function() {
+                    if (!this.title) return
+                    var todo_one = {}
+                    todo_one.id = this.todos.length + 1
+                    todo_one.title = this.title
+                    todo_one.completed = false
+                    this.todos.push(todo_one)
+                    this.all_todos.push(todo_one)
+                },
+                destroy: function(id) {
+                    this.todos = this.todos.filter((item) => item.id != id)
+                },
+                edit_content: function(id) {
+                    console.log(id)
+                    this.currentIndex = id
+                },
+                edit_finish: function(id, title) {
+                    this.todos.some((item) => {
+                        if (item.id == id) {
+                            item.title = title
+                            this.currentIndex = ''
+                            return true
+                        }
+                    })
+                },
+                all_item: function(event) {
+                    this.selected_index = 1
+                    this.todos = this.all_todos
+
+                },
+                active_item: function(event) {
+                    this.selected_index = 2
+                    this.active_todos = this.all_todos.filter((item) => item.completed == false)
+                    this.todos = this.active_todos
+                },
+                completed_item: function(event) {
+                    this.selected_index = 3
+                    this.completed_todos = this.all_todos.filter((item) => item.completed == true)
+                    this.todos = this.completed_todos
+                },
+                clear_completed: function(event) {
+                    this.todos = this.todos.filter((item) => item.completed == false)
+                    this.all_todos = this.todos.filter((item) => item.completed == false)
+                    this.all_completed = false
+                },
+                toggle_all: function() {
+                    if (this.all_completed) {
+                        this.todos.forEach((item) => item.completed = false)
+                        this.all_todos.forEach((item) => item.completed = false)
+                    } else {
+                        this.todos.forEach((item) => item.completed = true)
+                        this.all_todos.forEach((item) => item.completed = true)
+                    }
+                }
+            },
+            computed: {
+                lefts: function() {
+                    return this.todos.filter((item) => item.completed == false).length
+                },
+            },
+            watch: {
+                todos: {
+                    handler: function(val, oldVal) {
+
+                        var flag = val.every(item => item.completed)
+                        if (flag) {
+                            this.all_completed = true
+                        } else {
+                            this.all_completed = false
+                        }
+
+                    },
+                    deep: true
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>
